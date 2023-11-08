@@ -23,7 +23,7 @@ public class AdvertisementController {
     @PostMapping(value="saveAdversement")
     public ResponseEntity<?> saveAdversement(@RequestBody AdvertisementDto advertisementDto) {
         
-       return ResponseEntity.ok().body(this.adversementService.saveAndFlush(advertisement));
+       return ResponseEntity.ok().body(this.adversementService.saveAndFlush(new Advertisement()));
     }
 
 
