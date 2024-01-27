@@ -45,10 +45,9 @@ public class Profile {
     private String cityOrigin;
     private boolean wantsToSharedProperty;
 
-    // private List<ProfileEnc> sendRequests;
-    // private List<ProfileEnc> receivedRequests;
-    // private List<ProfileEnc> blockeds;
+    private Property property;
 
+ 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "receiverSenderConnections",
@@ -56,4 +55,20 @@ public class Profile {
             inverseJoinColumns = @JoinColumn(name = "sender_profile_id")
     )
     private Set<Profile> receiverSenderConnections = new HashSet<>();
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "connections",
+            joinColumns = @JoinColumn(name = "connection_1_id_fk"),
+            inverseJoinColumns = @JoinColumn(name = "connection_2_id_fk")
+    )
+    private Set<Profile> connections = new HashSet<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "blocked",
+            joinColumns = @JoinColumn(name = "profile_id_fk"),
+            inverseJoinColumns = @JoinColumn(name = "blocked_profile_id_fk")
+    )
+    private Set<Profile> blocked = new HashSet<>();
 }
