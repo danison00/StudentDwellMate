@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table
 public class Property implements Serializable{
@@ -24,7 +27,6 @@ public class Property implements Serializable{
     private String postalCode;
 
     List<String> propertyPhoto;
-    String propertyDetails;
     
 }
 
