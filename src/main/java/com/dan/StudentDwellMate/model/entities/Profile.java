@@ -49,7 +49,7 @@ public class Profile {
     // private List<ProfileEnc> receivedRequests;
     // private List<ProfileEnc> blockeds;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "receiverSenderConnections",
             joinColumns = @JoinColumn(name = "receiver_profile_id"),
