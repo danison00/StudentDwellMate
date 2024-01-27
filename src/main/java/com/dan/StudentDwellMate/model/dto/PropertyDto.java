@@ -9,6 +9,7 @@ public record PropertyDto(
         String street,
         String neighborhood,
         String additionalDetails,
+        String houseNumber,
         String postalCode,
         List<String> propertyPhoto,
         String propertyDetails) {
