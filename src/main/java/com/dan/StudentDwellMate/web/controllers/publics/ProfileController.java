@@ -7,6 +7,7 @@ import com.dan.StudentDwellMate.Service.ProfileService;
 import com.dan.StudentDwellMate.model.dto.ProfileDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class ProfileController {
     private ProfileService profileServ;
 
     @PostMapping("/new-profile")
-    public ResponseEntity<HttpStatus> newProfile(@RequestBody ProfileDto profile) {
+    public ResponseEntity<HttpStatus> newProfile(@RequestBody ProfileDto profile) throws DataIntegrityViolationException {
         
         this.profileServ.save(profile);
 
