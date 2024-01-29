@@ -3,6 +3,7 @@ package com.dan.StudentDwellMate.model.entities;
 import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,8 +34,10 @@ public class Profile {
 
     private String name;
     private String faculty;
+    @Column(length = 40)
     private String course;
     private int age;
+    @Column(unique = true)
     private String email;
     private String instagram;
     private String facebook;
