@@ -2,7 +2,6 @@ package com.dan.StudentDwellMate.model.dto;
 
 public record ProfileDto(
                 String name,
-                String cpf,
                 String faculty,
                 String course,
                 int age,

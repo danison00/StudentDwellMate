@@ -23,7 +23,6 @@ public class Mapper {
         return Profile.builder()
                 .name(dto.name())
                 .age(dto.age())
-                .cpf(dto.cpf())
                 .email(dto.email())
                 .facebook(dto.facebook())
                 .instagram(dto.instagram())

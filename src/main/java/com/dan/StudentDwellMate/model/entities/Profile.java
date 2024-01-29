@@ -32,7 +32,6 @@ public class Profile {
     private Long id;
 
     private String name;
-    private String cpf;
     private String faculty;
     private String course;
     private int age;
@@ -74,11 +73,10 @@ public class Profile {
     )
     private Set<Profile> blocked = new HashSet<>();
 
-public Profile(String name, String cpf, String faculty, String course, int age, String email, String instagram,
+public Profile(String name, String faculty, String course, int age, String email, String instagram,
                 String facebook, String whatsapp, String profilePhotoUrl, boolean hasRentedProperty, String cityOrigin,
                 boolean wantsToSharedProperty, Property property) {
         this.name = name;
-        this.cpf = cpf;
         this.faculty = faculty;
         this.course = course;
         this.age = age;
