@@ -58,7 +58,7 @@ public class Profile {
             joinColumns = @JoinColumn(name = "receiver_profile_id"),
             inverseJoinColumns = @JoinColumn(name = "sender_profile_id")
     )
-    private Set<Profile> receiverSenderConnections = new HashSet<>();
+    private Set<Profile> receiverSenderConnections;// = new HashSet<>();
     
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -66,7 +66,7 @@ public class Profile {
             joinColumns = @JoinColumn(name = "connection_1_id_fk"),
             inverseJoinColumns = @JoinColumn(name = "connection_2_id_fk")
     )
-    private Set<Profile> connections = new HashSet<>();
+    private Set<Profile> connections;// = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -74,7 +74,7 @@ public class Profile {
             joinColumns = @JoinColumn(name = "profile_id_fk"),
             inverseJoinColumns = @JoinColumn(name = "blocked_profile_id_fk")
     )
-    private Set<Profile> blocked = new HashSet<>();
+    private Set<Profile> blocked;// = new HashSet<>();
 
 public Profile(String name, String faculty, String course, int age, String email, String instagram,
                 String facebook, String whatsapp, String profilePhotoUrl, boolean hasRentedProperty, String cityOrigin,
