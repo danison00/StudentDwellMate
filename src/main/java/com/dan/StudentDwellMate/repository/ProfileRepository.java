@@ -6,4 +6,6 @@ import com.dan.StudentDwellMate.model.entities.Profile;
 
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
     
+
+    boolean existsByEmail(String email);
 }
