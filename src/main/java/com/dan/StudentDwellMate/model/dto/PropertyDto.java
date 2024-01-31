@@ -11,7 +11,6 @@ public record PropertyDto(
         String additionalDetails,
         String houseNumber,
         String postalCode,
-        List<String> propertyPhoto,
-        String propertyDetails) {
+        List<String> propertyPhoto) {
 
 }
