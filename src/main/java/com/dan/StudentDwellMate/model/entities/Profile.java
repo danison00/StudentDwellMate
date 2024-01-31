@@ -63,8 +63,8 @@ public class Profile {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "connections",
-            joinColumns = @JoinColumn(name = "connection_1_id_fk"),
-            inverseJoinColumns = @JoinColumn(name = "connection_2_id_fk")
+            joinColumns = @JoinColumn(name = "profile_id_fk"),
+            inverseJoinColumns = @JoinColumn(name = "profile_connected_id_fk")
     )
     private Set<Profile> connections;// = new HashSet<>();
 
