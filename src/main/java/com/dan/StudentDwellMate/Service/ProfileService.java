@@ -15,4 +15,8 @@ public interface ProfileService {
     boolean existsByEmail(String email);
 
     List<ProfileResponseDto> getAllProfiles(Long id);
+
+    void blockProfile(Long idProfile, Long idProfileBlock);
+
+    void unblockProfile(Long idProfile, Long idProfileBlocked);
 }

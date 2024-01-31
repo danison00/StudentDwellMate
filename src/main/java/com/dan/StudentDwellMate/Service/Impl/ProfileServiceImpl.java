@@ -36,4 +36,16 @@ public class ProfileServiceImpl implements ProfileService {
         return profilesDto;
     }
 
+    @Override
+    public void blockProfile(Long id, Long idProfileBlock) {
+
+        this.profileRep.blockProfile(idProfileBlock, idProfileBlock);
+
+    }
+
+    @Override
+    public void unblockProfile(Long idProfile, Long idProfileBlocked) {
+        this.profileRep.unblockProfile(idProfile, idProfileBlocked);
+    }
+
 }
