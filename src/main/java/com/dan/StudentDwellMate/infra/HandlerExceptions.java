@@ -17,4 +17,10 @@ public class HandlerExceptions {
         return ResponseEntity.badRequest().build();
 
     }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> ex2(RuntimeException e) {
+        return ResponseEntity.badRequest().body(new ErrorResponseDto("none", e.getMessage(), false));
+
+    }
 }

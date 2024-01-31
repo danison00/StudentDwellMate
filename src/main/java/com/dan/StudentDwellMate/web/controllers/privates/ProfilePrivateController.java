@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dan.StudentDwellMate.Service.ProfileService;
 import com.dan.StudentDwellMate.repository.ProfileRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ProfilePrivateController {
 
     @Autowired
-    private ProfileRepository profileRep;
+    private ProfileService profileServ;
 
     @PostMapping("/block-profile")
     public ResponseEntity<?> blockProfile(@RequestParam("idProfile")Long idProfile, @RequestParam("idProfileBlock")Long idProfileBlock) {
         
-        this.profileRep.blockProfile(idProfile, idProfileBlock);
+        this.profileServ.blockProfile(idProfile, idProfileBlock);
         
         return ResponseEntity.ok().build();
     }
@@ -30,7 +31,7 @@ public class ProfilePrivateController {
     @PostMapping("/unblock-profile")
     public ResponseEntity<?> unblockProfile(@RequestParam("idProfile")Long idProfile, @RequestParam("idProfileBlocked")Long idProfileBlocked) {
         
-        this.profileRep.unblockProfile(idProfile, idProfileBlocked);
+        this.profileServ.unblockProfile(idProfile, idProfileBlocked);
         
         return ResponseEntity.ok().build();
     }
