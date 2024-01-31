@@ -29,5 +29,9 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
     @Query(value = "DELETE FROM blocked WHERE profile_id_fk = :idProfile AND blocked_profile_id_fk = :idProfileBlocked", nativeQuery = true)
     void unblockProfile(Long idProfile, Long idProfileBlocked);
 
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO  connections(profile_id_fk, profile_connected_id_fk) VALUES(:idProfile, :idProfileConnected)", nativeQuery = true)
+    void addConnection(Long idProfile, Long idProfileConnected);
 
 }
