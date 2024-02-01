@@ -13,20 +13,10 @@ import com.dan.StudentDwellMate.model.entities.Property;
 public class Mapper {
 
     public static Profile getProfile(ProfileRequestDto dto) {
-        var propertyDto = dto.property();
 
-        var property = Property.builder()
-                .city(propertyDto.city())
-                .state(propertyDto.state())
-                .street(propertyDto.street())
-                .houseNumber(propertyDto.houseNumber())
-                .neighborhood(propertyDto.neighborhood())
-                .postalCode(propertyDto.postalCode())
-                .propertyPhoto(propertyDto.propertyPhoto())
-                .additionalDetails(propertyDto.additionalDetails())
-                .build();
+        Property property = getpProperty(dto.property());
 
-        return Profile.builder()
+        var profile = Profile.builder()
                 .name(dto.name())
                 .age(dto.age())
                 .email(dto.email())
@@ -41,20 +31,16 @@ public class Mapper {
                 .property(property)
                 .wantsToSharedProperty(dto.wantsToSharedProperty())
                 .build();
+
+        if (property != null)
+            property.setProfile(profile);
+
+        return profile;
     }
 
     public static ProfileResponseDto getProfileDto(Profile profile) {
-
-        var p = profile.getProperty();
-
-        var propertyDto = new PropertyDto(p.getCity(),
-                p.getState(),
-                p.getStreet(),
-                p.getNeighborhood(),
-                p.getAdditionalDetails(),
-                p.getHouseNumber(),
-                p.getPostalCode(),
-                p.getPropertyPhoto());
+       
+        PropertyDto propertyDto = getPropertyDto(profile.getProperty());
 
         return new ProfileResponseDto(
                 profile.getId(),
@@ -73,13 +59,11 @@ public class Mapper {
 
     public static List<ProfileResponseDto> getProfileDto(List<Profile> profiles) {
 
-
         List<ProfileResponseDto> profilesDto = new ArrayList<>();
 
-        profiles.forEach((Profile p)->{
+        profiles.forEach((Profile p) -> {
             profilesDto.add(
-                getProfileDto(p)
-            );
+                    getProfileDto(p));
         });
 
         return profilesDto;
@@ -87,15 +71,44 @@ public class Mapper {
 
     public static List<ProfileResponseDto> getProfileDto(Set<Profile> profiles) {
 
-
         List<ProfileResponseDto> profilesDto = new ArrayList<>();
 
-        profiles.forEach((Profile p)->{
-            profilesDto.add(
-                getProfileDto(p)
-            );
+        profiles.forEach((Profile p) -> {
+            profilesDto.add(getProfileDto(p));
         });
 
         return profilesDto;
+    }
+
+    public static PropertyDto getPropertyDto(Property p) {
+
+        if (p == null) return null;
+        
+
+        return new PropertyDto(
+                p.getCity(),
+                p.getState(),
+                p.getStreet(),
+                p.getNeighborhood(),
+                p.getAdditionalDetails(),
+                p.getHouseNumber(),
+                p.getPostalCode(),
+                p.getPropertyPhoto());
+    }
+    public static Property getpProperty(PropertyDto dto){
+        
+        if (dto == null) return null;
+            
+        return Property.builder()
+        .city(dto.city())
+        .state(dto.state())
+        .street(dto.street())
+        .houseNumber(dto.houseNumber())
+        .neighborhood(dto.neighborhood())
+        .postalCode(dto.postalCode())
+        .propertyPhoto(dto.propertyPhoto())
+        .additionalDetails(dto.additionalDetails())
+        .build();
+
     }
 }
