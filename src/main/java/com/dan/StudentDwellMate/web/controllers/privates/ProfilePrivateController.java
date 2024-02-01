@@ -43,7 +43,7 @@ public class ProfilePrivateController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/remove-connection-request")
+    @PostMapping("/remove-connection-request-sent")
     public ResponseEntity<?> removeConnection(@RequestParam("idSenderProfile") Long idSenderProfile,
             @RequestParam("idReceiverProfile") Long idReceiverProfile) {
 
