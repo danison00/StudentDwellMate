@@ -20,18 +20,27 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO  blocked(profile_id_fk, blocked_profile_id_fk) VALUES(:idProfile, :idProfileBlock)", nativeQuery = true)
+    @Query(value = "INSERT INTO  blocked(id_fk_profile, id_fk_blocked_profile) VALUES(:idProfile, :idProfileBlock)", nativeQuery = true)
     void blockProfile(Long idProfile, Long idProfileBlock);
 
 
     @Modifying
     @Transactional    
-    @Query(value = "DELETE FROM blocked WHERE profile_id_fk = :idProfile AND blocked_profile_id_fk = :idProfileBlocked", nativeQuery = true)
+    @Query(value = "DELETE FROM blocked WHERE id_fk_profile = :idProfile AND id_fk_blocked_profile = :idProfileBlocked", nativeQuery = true)
     void unblockProfile(Long idProfile, Long idProfileBlocked);
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO  connections(profile_id_fk, profile_connected_id_fk) VALUES(:idProfile, :idProfileConnected)", nativeQuery = true)
-    void addConnection(Long idProfile, Long idProfileConnected);
+    @Query(value = "INSERT INTO connection_requests(id_fk_sender_profile, id_fk_receiver_profile) VALUES(:idSenderProfile, :idReceiverProfile)", nativeQuery = true)
+    void addRequestConnection(Long idSenderProfile, Long idReceiverProfile);
 
+   
+    @Modifying
+    @Transactional    
+    @Query(value = "DELETE FROM connection_requests WHERE id_fk_sender_profile = :idSenderProfile AND id_fk_receiver_profile = :idReceiverProfile", nativeQuery = true)
+    void removeConnectionRequest(Long idSenderProfile, Long idReceiverProfile);
+
+
+    @Query(value="SELECT * FROM connection_requests cr JOIN profile p ON p.id = cr.id_fk_sender_profile WHERE cr.id_fk_receiver_profile = :id", nativeQuery=true)
+    List<Profile> getAllConnectionRequetsReceived(Long id);
 }
