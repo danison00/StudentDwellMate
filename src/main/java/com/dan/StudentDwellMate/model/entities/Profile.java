@@ -1,10 +1,12 @@
 package com.dan.StudentDwellMate.model.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +31,7 @@ import lombok.Setter;
 @Builder
 @Table
 @Entity
-public class Profile {
+public class Profile implements Serializable{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,12 +52,11 @@ public class Profile {
         private String cityOrigin;
         private boolean wantsToSharedProperty;
 
-        @OneToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "id_fk_property")
+        @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
         private Property property;
 
         @ManyToMany(cascade = CascadeType.ALL)
-        @JoinTable(name = "connection_requests", joinColumns = @JoinColumn(name="id_fk_sender_profile"), inverseJoinColumns = @JoinColumn(name="id_fk_receiver_profile"))
+        @JoinTable(name = "connection_requests", joinColumns = @JoinColumn(name = "id_fk_sender_profile"), inverseJoinColumns = @JoinColumn(name = "id_fk_receiver_profile"))
         private Set<Profile> connectionRequest;
 
         @ManyToMany(cascade = CascadeType.ALL)

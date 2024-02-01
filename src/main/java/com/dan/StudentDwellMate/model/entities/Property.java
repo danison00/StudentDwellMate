@@ -18,6 +18,10 @@ public class Property implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne()
+    @JoinColumn(name = "id_fk_profile")
+    private Profile profile;
+
     private String city;
     private String state;
     private String street;
