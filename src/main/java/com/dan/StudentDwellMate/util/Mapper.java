@@ -2,6 +2,7 @@ package com.dan.StudentDwellMate.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import com.dan.StudentDwellMate.model.dto.ProfileRequestDto;
 import com.dan.StudentDwellMate.model.dto.PropertyDto;
@@ -71,6 +72,20 @@ public class Mapper {
     }
 
     public static List<ProfileResponseDto> getProfileDto(List<Profile> profiles) {
+
+
+        List<ProfileResponseDto> profilesDto = new ArrayList<>();
+
+        profiles.forEach((Profile p)->{
+            profilesDto.add(
+                getProfileDto(p)
+            );
+        });
+
+        return profilesDto;
+    }
+
+    public static List<ProfileResponseDto> getProfileDto(Set<Profile> profiles) {
 
 
         List<ProfileResponseDto> profilesDto = new ArrayList<>();
