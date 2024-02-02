@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dan.StudentDwellMate.Service.ProfileService;
 import com.dan.StudentDwellMate.model.dto.ProfileRequestDto;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
+import com.dan.StudentDwellMate.model.entities.ConnectionRequest;
 import com.dan.StudentDwellMate.model.entities.Profile;
+import com.dan.StudentDwellMate.repository.ConnectionRequestsRepository;
 import com.dan.StudentDwellMate.repository.ProfileRepository;
 import com.dan.StudentDwellMate.util.Mapper;
 
@@ -35,113 +37,33 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public List<ProfileResponseDto> getAllProfiles(Long id) {
 
+        this.findById(id);
+
         var profilesDto = Mapper.getProfileDto(this.profileRep.getAllProfiles(id));
         return profilesDto;
     }
 
     @Override
-    public void blockProfile(Long idProfile, Long idProfileBlock) {
+    public List<ProfileResponseDto> getProfilesFromConnectionRequestsSent(Long idProfile) {
 
-        Optional<Profile> profile = this.profileRep.findById(idProfile);
-        Optional<Profile> profileBlocked = this.profileRep.findById(idProfileBlock);
+        this.findById(idProfile);        
 
-        if (profile.isEmpty())
-            throw new RuntimeException("Perfil não encontrado");
-
-        if (profileBlocked.isEmpty())
-            throw new RuntimeException("Perfil  que deseja bloquear não foi encontrado");
-
-        if (idProfile.compareTo(idProfileBlock) == 0)
-            throw new RuntimeException("Você não pode bloquear a si próprio");
-
-        if (profile.get().getBlocked().contains(profileBlocked.get()))
-            throw new RuntimeException("Perfil já bloqueado");
-
-        this.profileRep.blockProfile(idProfile, idProfileBlock);
-
+        return Mapper.getProfileDto(this.profileRep.getProfilesFromConnectionRequestsSent(idProfile));
     }
+
+  
 
     @Override
-    public void unblockProfile(Long idProfile, Long idProfileBlocked) {
+    public List<ProfileResponseDto> getProfilesFromConnectionRequestsReceiver(Long idProfile) {
+   
+        this.findById(idProfile);        
 
-        Optional<Profile> profile = this.profileRep.findById(idProfile);
-        Optional<Profile> profileBlocked = this.profileRep.findById(idProfileBlocked);
-
-        if (profile.isEmpty())
-            throw new RuntimeException("Perfil não encontrado");
-
-        if (profileBlocked.isEmpty())
-            throw new RuntimeException("Perfil bloqueado não encontrado");
-
-        if (idProfile.compareTo(idProfileBlocked) == 0)
-            throw new RuntimeException("Você não pode desbloquear a si próprio");
-
-        if (!profile.get().getBlocked().contains(profileBlocked.get()))
-            throw new RuntimeException("Este perfil não está na sua lista de bloqueados");
-
-        this.profileRep.unblockProfile(idProfile, idProfileBlocked);
+        return Mapper.getProfileDto(this.profileRep.getProfilesFromConnectionRequestsReceiver(idProfile));
     }
-
-    @Transactional
     @Override
-    public void addConnectionRequest(Long idSenderProfile, Long idReceiverProfile) {
-
-        Optional<Profile> senderProfile = this.profileRep.findById(idSenderProfile);
-        Optional<Profile> receiverProfile = this.profileRep.findById(idReceiverProfile);
-
-        if (senderProfile.isEmpty())
-            throw new RuntimeException("Perfil não encontrado");
-
-        if (receiverProfile.isEmpty())
-            throw new RuntimeException("O perfil para referente a esta solicitação não foi encontrado");
-
-        if (idSenderProfile.compareTo(idReceiverProfile) == 0)
-            throw new RuntimeException("Você não pode enviar uma solicitação de conexão para si mesmo");
-
-        this.profileRep.addRequestConnection(idSenderProfile, idReceiverProfile);
-
-        senderProfile.get().getConnectionRequest().forEach((e) -> System.out.println(e.getEmail()));
+    public Profile findById(Long id) {
+        return this.profileRep.findById(id).orElseThrow(()-> new RuntimeException("Usuário não encontrado"));
     }
 
-    @Override
-    public void removeConnectionRequestSent(Long idSenderProfile, Long idReceiverProfile) {
-
-        Optional<Profile> senderProfile = this.profileRep.findById(idSenderProfile);
-        Optional<Profile> receiverProfile = this.profileRep.findById(idReceiverProfile);
-
-        if (senderProfile.isEmpty())
-            throw new RuntimeException("Seu perfil não encontrado");
-
-        if (receiverProfile.isEmpty())
-            throw new RuntimeException("O perfil para referente a esta solicitação não foi encontrado");
-
-        if (idSenderProfile.compareTo(idReceiverProfile) == 0)
-            throw new RuntimeException("Você não pode remover uma solicitação de conexão para si mesmo");
-
-        this.profileRep.removeConnectionRequest(idSenderProfile, idReceiverProfile);
-
-    }
-
-    @Override
-    public List<ProfileResponseDto> getAllConnectionRequestSent(Long idProfile) {
-
-        var profile = this.profileRep.findById(idProfile);
-
-        if (profile.isEmpty()) 
-            throw new RuntimeException("Seu perfil não foi encontrado");
-        
-
-        return Mapper.getProfileDto(profile.get().getConnectionRequest());
-    }
-
-    @Override
-    public List<ProfileResponseDto> getAllConnectionRequestReceived(Long idProfile) {
-
-        if (this.profileRep.findById(idProfile).isEmpty()) 
-            throw new RuntimeException("Seu perfil não foi encontrado");
-
-
-        return Mapper.getProfileDto(this.profileRep.getAllConnectionRequetsReceived(idProfile));
-    }
 
 }

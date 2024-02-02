@@ -1,30 +1,27 @@
 package com.dan.StudentDwellMate.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.dan.StudentDwellMate.model.dto.ProfileRequestDto;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
+import com.dan.StudentDwellMate.model.entities.Profile;
 
 public interface ProfileService {
 
     void save(ProfileRequestDto profileDto) throws DataIntegrityViolationException;
 
+    Profile findById(Long id);
+
     boolean existsByEmail(String email);
 
     List<ProfileResponseDto> getAllProfiles(Long id);
 
-    void blockProfile(Long idProfile, Long idProfileBlock);
+    List<ProfileResponseDto> getProfilesFromConnectionRequestsSent(Long idProfile);
 
-    void unblockProfile(Long idProfile, Long idProfileBlocked);
+    List<ProfileResponseDto> getProfilesFromConnectionRequestsReceiver(Long idProfile);
 
-    void addConnectionRequest(Long idProfile, Long idProfileConnection);
-
-    void removeConnectionRequestSent(Long idProfile, Long idProfileConnected);
-
-    List<ProfileResponseDto> getAllConnectionRequestSent(Long idProfile);
-
-    List<ProfileResponseDto> getAllConnectionRequestReceived(Long idProfile);
 
 }
