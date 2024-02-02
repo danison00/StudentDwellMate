@@ -1,7 +1,6 @@
 package com.dan.StudentDwellMate.Service;
 
 import java.util.List;
-
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 
 public interface ConnectionRequestsService {

@@ -1,8 +1,6 @@
 package com.dan.StudentDwellMate.Service.Impl;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +10,7 @@ import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 import com.dan.StudentDwellMate.model.entities.ConnectionRequest;
 import com.dan.StudentDwellMate.model.entities.Profile;
 import com.dan.StudentDwellMate.repository.ConnectionRequestsRepository;
+import com.dan.StudentDwellMate.util.Mapper;
 
 @Service
 public class ConnectionRequestsServiceImpl implements ConnectionRequestsService {
@@ -37,9 +36,6 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
         }
         var connectionRequest = new ConnectionRequest(senderProfile, receiverProfile);
 
-        System.out.println(connectionRequest.getReceiver().getEmail());
-        System.out.println(connectionRequest.getSender().getEmail());
-        System.out.println(connectionRequest.getDate());
 
         senderProfile.getResquestsConnectionSent().add(connectionRequest);
         receiverProfile.getResquestsConnectionReceived().add(connectionRequest);
@@ -65,7 +61,7 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
     @Override
     public List<ProfileResponseDto> getAllConnectionRequestSent(Long idProfile) {
 
-        return this.profileServ.getProfilesFromConnectionRequestsSent(idProfile);
+        return Mapper.getProfileDto(this.connectionRequestsRep.getProfilesFromConnectionRequestsSent(idProfile));
 
     }
 
@@ -78,7 +74,7 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
     @Override
     public List<ProfileResponseDto> getAllConnectionRequestReceiver(Long idProfile) {
        
-        return this.profileServ.getProfilesFromConnectionRequestsReceiver(idProfile);
+        return Mapper.getProfileDto(this.connectionRequestsRep.getProfilesFromConnectionRequestsReceived(idProfile));
     }
 
 }
