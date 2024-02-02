@@ -3,7 +3,8 @@ package com.dan.StudentDwellMate.web.controllers.publics;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.dan.StudentDwellMate.Service.ProfileService;
-import com.dan.StudentDwellMate.model.dto.ProfileRequestDto;
+import com.dan.StudentDwellMate.model.dto.request.ProfileRequestDto;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

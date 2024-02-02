@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.dan.StudentDwellMate.Service.ProfileService;
-import com.dan.StudentDwellMate.model.dto.ExistsResponseDto;
+import com.dan.StudentDwellMate.model.dto.request.ExistsResponseDto;
 
 @RestController
 @RequestMapping("api/public/exists")

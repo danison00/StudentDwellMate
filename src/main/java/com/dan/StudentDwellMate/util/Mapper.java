@@ -3,10 +3,11 @@ package com.dan.StudentDwellMate.util;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import com.dan.StudentDwellMate.model.dto.ProfileRequestDto;
-import com.dan.StudentDwellMate.model.dto.PropertyDto;
+import com.dan.StudentDwellMate.model.dto.request.ProfileRequestDto;
+import com.dan.StudentDwellMate.model.dto.request.PropertyDto;
+import com.dan.StudentDwellMate.model.dto.response.ConnectionRequestDto;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
+import com.dan.StudentDwellMate.model.entities.ConnectionRequest;
 import com.dan.StudentDwellMate.model.entities.Profile;
 import com.dan.StudentDwellMate.model.entities.Property;
 
