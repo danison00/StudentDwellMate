@@ -35,10 +35,6 @@ public class ProfileController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/get-all-profiles")
-    public ResponseEntity<List<ProfileResponseDto>> getAllProfiles(@RequestParam Long id) {
-        
-        return ResponseEntity.ok().body(this.profileServ.getAllProfiles(Long.valueOf(id)));
-    }
+  
 
 }
