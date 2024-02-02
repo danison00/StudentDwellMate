@@ -1,11 +1,13 @@
 package com.dan.StudentDwellMate.Service.Impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.dan.StudentDwellMate.Service.ConnectionRequestsService;
 import com.dan.StudentDwellMate.Service.ProfileService;
+import com.dan.StudentDwellMate.model.dto.response.ConnectionRequestDto;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 import com.dan.StudentDwellMate.model.entities.ConnectionRequest;
 import com.dan.StudentDwellMate.model.entities.Profile;
@@ -36,7 +38,6 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
         }
         var connectionRequest = new ConnectionRequest(senderProfile, receiverProfile);
 
-
         senderProfile.getResquestsConnectionSent().add(connectionRequest);
         receiverProfile.getResquestsConnectionReceived().add(connectionRequest);
 
@@ -55,16 +56,27 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
             throw new RuntimeException("Solicitação de conexão não encontrada");
 
         this.connectionRequestsRep.deleteById(connectionRequestId);
-    }
 
+    }
 
     @Override
-    public List<ProfileResponseDto> getAllConnectionRequestSent(Long idProfile) {
+    public List<ConnectionRequestDto> getAllConnectionRequestSent(Long idProfile) {
 
-        return Mapper.getProfileDto(this.connectionRequestsRep.getProfilesFromConnectionRequestsSent(idProfile));
+        this.profileServ.findById(idProfile);
+
+        var connectionRequests = this.connectionRequestsRep.getProfilesFromConnectionRequestsSent(idProfile);
+
+        List<ConnectionRequestDto> connectionRequestDtos = new ArrayList<>();
+
+        connectionRequests.forEach((cr) -> {
+
+            var profileDto = Mapper.getProfileDto(cr.getReceiver());
+
+            connectionRequestDtos.add(new ConnectionRequestDto(cr.getId(), profileDto, cr.getDate()));
+        });
+        return connectionRequestDtos;
 
     }
-
 
     public ConnectionRequest findById(Long id) {
         return this.connectionRequestsRep.findById(id)
@@ -73,7 +85,9 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
 
     @Override
     public List<ProfileResponseDto> getAllConnectionRequestReceiver(Long idProfile) {
-       
+
+        this.profileServ.findById(idProfile);
+
         return Mapper.getProfileDto(this.connectionRequestsRep.getProfilesFromConnectionRequestsReceived(idProfile));
     }
 

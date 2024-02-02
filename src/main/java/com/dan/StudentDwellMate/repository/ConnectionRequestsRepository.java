@@ -12,10 +12,12 @@ public interface ConnectionRequestsRepository extends JpaRepository<ConnectionRe
     @Query("SELECT cr FROM ConnectionRequest cr WHERE (cr.sender.id = :idSender AND cr.receiver.id = :idReceiver) OR (cr.receiver.id = :idSender AND cr.sender.id = :idReceiver)")
     Optional<ConnectionRequest> connectionRequestAlreadyExists(Long idSender, Long idReceiver);
 
-    @Query("SELECT cr.receiver FROM ConnectionRequest cr WHERE cr.sender.id = :idProfile")
-    List<Profile> getProfilesFromConnectionRequestsSent(Long idProfile);
+    @Query("SELECT cr FROM ConnectionRequest cr WHERE cr.sender.id = :idProfile")
+    List<ConnectionRequest> getProfilesFromConnectionRequestsSent(Long idProfile);
 
     @Query("SELECT cr.sender FROM ConnectionRequest cr WHERE cr.receiver.id = :idProfile")
     List<Profile> getProfilesFromConnectionRequestsReceived(Long idProfile);
+
+    void deleteById(Long id);
 
 }
