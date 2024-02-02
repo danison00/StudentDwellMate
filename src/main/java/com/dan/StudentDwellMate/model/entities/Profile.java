@@ -52,10 +52,10 @@ public class Profile implements Serializable{
         @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
         private Property property;
 
-        @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+        @OneToMany(mappedBy = "sender")
         private List<ConnectionRequest> resquestsConnectionSent;
         
-        @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+        @OneToMany(mappedBy = "receiver")
         private List<ConnectionRequest> resquestsConnectionReceived;
 
         @ManyToMany(cascade = CascadeType.ALL)

@@ -31,11 +31,11 @@ public class ConnectionRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_fk_profile_sender")
     private Profile sender;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_fk_profile_receiver")
     private Profile receiver;
 
