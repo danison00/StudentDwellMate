@@ -1,6 +1,6 @@
 package com.dan.StudentDwellMate.model.dto.response;
 
-import com.dan.StudentDwellMate.model.dto.PropertyDto;
+import com.dan.StudentDwellMate.model.dto.request.PropertyDto;
 
 public record ProfileResponseDto(
                 Long id,

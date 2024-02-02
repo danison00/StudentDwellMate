@@ -1,4 +1,4 @@
-package com.dan.StudentDwellMate.model.dto;
+package com.dan.StudentDwellMate.model.dto.request;
 
 import java.util.List;
 

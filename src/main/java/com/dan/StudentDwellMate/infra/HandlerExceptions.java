@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.dan.StudentDwellMate.model.dto.ErrorResponseDto;
+import com.dan.StudentDwellMate.model.dto.request.ErrorResponseDto;
 
 @RestControllerAdvice
 public class HandlerExceptions {

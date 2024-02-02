@@ -1,4 +1,4 @@
-package com.dan.StudentDwellMate.model.dto;
+package com.dan.StudentDwellMate.model.dto.request;
 
 public record ProfileRequestDto(
                 String name,
