@@ -1,4 +1,4 @@
-package com.dan.StudentDwellMate.Service.Impl;
+package com.dan.StudentDwellMate.Service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
