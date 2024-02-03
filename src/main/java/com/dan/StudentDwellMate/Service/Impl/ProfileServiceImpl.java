@@ -4,7 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import com.dan.StudentDwellMate.Service.ProfileService;
+
+import com.dan.StudentDwellMate.Service.interfaces.ProfileService;
 import com.dan.StudentDwellMate.model.dto.request.ProfileRequestDto;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 import com.dan.StudentDwellMate.model.entities.Profile;

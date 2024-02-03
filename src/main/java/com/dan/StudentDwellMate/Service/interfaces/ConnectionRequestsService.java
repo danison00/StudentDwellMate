@@ -1,4 +1,4 @@
-package com.dan.StudentDwellMate.Service;
+package com.dan.StudentDwellMate.Service.interfaces;
 
 import java.util.List;
 

@@ -4,8 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.dan.StudentDwellMate.Service.BlockProfileService;
-import com.dan.StudentDwellMate.Service.ProfileService;
+
+import com.dan.StudentDwellMate.Service.interfaces.BlockProfileService;
+import com.dan.StudentDwellMate.Service.interfaces.ProfileService;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 import com.dan.StudentDwellMate.model.entities.Profile;
 import com.dan.StudentDwellMate.repository.ProfileRepository;

@@ -6,7 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.dan.StudentDwellMate.Service.ProfileService;
+
+import com.dan.StudentDwellMate.Service.interfaces.ProfileService;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
 
