@@ -6,6 +6,7 @@ import java.util.Set;
 import com.dan.StudentDwellMate.model.dto.request.ProfileRequestDto;
 import com.dan.StudentDwellMate.model.dto.request.PropertyDto;
 import com.dan.StudentDwellMate.model.dto.response.ConnectionRequestDto;
+import com.dan.StudentDwellMate.model.dto.response.ProfilePrivateDto;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 import com.dan.StudentDwellMate.model.entities.ConnectionRequest;
 import com.dan.StudentDwellMate.model.entities.Profile;
@@ -40,7 +41,7 @@ public class Mapper {
     }
 
     public static ProfileResponseDto getProfileDto(Profile profile) {
-       
+
         PropertyDto propertyDto = getPropertyDto(profile.getProperty());
 
         return new ProfileResponseDto(
@@ -70,6 +71,38 @@ public class Mapper {
         return profilesDto;
     }
 
+    public static ProfilePrivateDto getProfilePrivateDto(Profile profile) {
+
+        return new ProfilePrivateDto(
+                profile.getId(),
+                profile.getName(),
+                profile.getFaculty(),
+                profile.getCourse(),
+                profile.getAge(),
+                profile.getInstagram(),
+                profile.getFacebook(),
+                profile.getEmail(),
+                profile.getWhatsapp(),
+                profile.getProfilePhotoUrl(),
+                profile.isHasRentedProperty(),
+                profile.getCityOrigin(),
+                profile.isWantsToSharedProperty(),
+                getPropertyDto(profile.getProperty()));
+
+    }
+
+    public static List<ProfilePrivateDto> getProfilePrivateDto(Set<Profile> profiles) {
+
+        List<ProfilePrivateDto> profilesDto = new ArrayList<>();
+
+        profiles.forEach((Profile p) -> {
+            profilesDto.add(
+                    getProfilePrivateDto(p));
+        });
+
+        return profilesDto;
+    }
+
     public static List<ProfileResponseDto> getProfileDto(Set<Profile> profiles) {
 
         List<ProfileResponseDto> profilesDto = new ArrayList<>();
@@ -83,8 +116,8 @@ public class Mapper {
 
     public static PropertyDto getPropertyDto(Property p) {
 
-        if (p == null) return null;
-        
+        if (p == null)
+            return null;
 
         return new PropertyDto(
                 p.getCity(),
@@ -96,20 +129,22 @@ public class Mapper {
                 p.getPostalCode(),
                 p.getPropertyPhoto());
     }
-    public static Property getpProperty(PropertyDto dto){
-        
-        if (dto == null) return null;
-            
+
+    public static Property getpProperty(PropertyDto dto) {
+
+        if (dto == null)
+            return null;
+
         return Property.builder()
-        .city(dto.city())
-        .state(dto.state())
-        .street(dto.street())
-        .houseNumber(dto.houseNumber())
-        .neighborhood(dto.neighborhood())
-        .postalCode(dto.postalCode())
-        .propertyPhoto(dto.propertyPhoto())
-        .additionalDetails(dto.additionalDetails())
-        .build();
+                .city(dto.city())
+                .state(dto.state())
+                .street(dto.street())
+                .houseNumber(dto.houseNumber())
+                .neighborhood(dto.neighborhood())
+                .postalCode(dto.postalCode())
+                .propertyPhoto(dto.propertyPhoto())
+                .additionalDetails(dto.additionalDetails())
+                .build();
 
     }
 }
