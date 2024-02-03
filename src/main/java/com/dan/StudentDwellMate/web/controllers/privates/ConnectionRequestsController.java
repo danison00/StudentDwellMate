@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 @RestController
 @RequestMapping("/api/private/connection-requests")
 public class ConnectionRequestsController {
@@ -27,7 +28,7 @@ public class ConnectionRequestsController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping()
+    @DeleteMapping("/remove")
     public ResponseEntity<?> removeConnection(@RequestParam("idProfile") Long idProfile,
             @RequestParam("idConnectionRequest") Long idConnectionRequest) {
 
@@ -47,5 +48,14 @@ public class ConnectionRequestsController {
 
         return ResponseEntity.ok().body(this.connectionRequestsServ.getAllConnectionRequestReceiver(id));
 
+    }
+
+    @DeleteMapping("/reject")
+    public ResponseEntity<?> rejectConnectionRequest(@RequestParam Long idProfile,
+            @RequestParam Long idConnectionRequest) {
+
+        this.connectionRequestsServ.rejectConnectionRequest(idProfile, idConnectionRequest);
+
+        return ResponseEntity.ok().build();
     }
 }

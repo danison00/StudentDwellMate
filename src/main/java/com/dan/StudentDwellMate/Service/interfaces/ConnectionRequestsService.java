@@ -15,5 +15,7 @@ public interface ConnectionRequestsService {
 
     List<ConnectionRequestDto> getAllConnectionRequestReceiver(Long idProfile);
 
+    void rejectConnectionRequest(Long idProfile, Long idConnectionRequest);
+
 
 }

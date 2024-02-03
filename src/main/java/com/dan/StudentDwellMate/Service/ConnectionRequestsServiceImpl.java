@@ -79,15 +79,8 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
 
     }
 
-    public ConnectionRequest findById(Long id) {
-        return this.connectionRequestsRep.findById(id)
-                .orElseThrow(() -> new RuntimeException("Solicitação de conexão não encontrada"));
-    }
-
     @Override
     public List<ConnectionRequestDto> getAllConnectionRequestReceiver(Long idProfile) {
-
-
 
         this.profileServ.findById(idProfile);
 
@@ -102,8 +95,26 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
             connectionRequestDtos.add(new ConnectionRequestDto(cr.getId(), profileDto, cr.getDate()));
         });
 
-
         return connectionRequestDtos;
+    }
+
+    @Override
+    public void rejectConnectionRequest(Long idProfile, Long idConnectionRequest) {
+
+        var profile = this.profileServ.findById(idProfile);
+
+        var connectionRequest = this.findById(idConnectionRequest);
+
+        if (!connectionRequest.getReceiver().equals(profile))
+            throw new RuntimeException("Solicitação de conexão não encontrada");
+
+        this.connectionRequestsRep.delete(connectionRequest);
+
+    }
+
+    public ConnectionRequest findById(Long id) {
+        return this.connectionRequestsRep.findById(id)
+                .orElseThrow(() -> new RuntimeException("Solicitação de conexão não encontrada"));
     }
 
 }
