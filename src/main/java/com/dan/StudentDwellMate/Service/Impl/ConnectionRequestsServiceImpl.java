@@ -64,7 +64,7 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
 
         this.profileServ.findById(idProfile);
 
-        var connectionRequests = this.connectionRequestsRep.getProfilesFromConnectionRequestsSent(idProfile);
+        var connectionRequests = this.connectionRequestsRep.getConnectionRequestsSent(idProfile);
 
         List<ConnectionRequestDto> connectionRequestDtos = new ArrayList<>();
 
@@ -84,11 +84,25 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
     }
 
     @Override
-    public List<ProfileResponseDto> getAllConnectionRequestReceiver(Long idProfile) {
+    public List<ConnectionRequestDto> getAllConnectionRequestReceiver(Long idProfile) {
+
+
 
         this.profileServ.findById(idProfile);
 
-        return Mapper.getProfileDto(this.connectionRequestsRep.getProfilesFromConnectionRequestsReceived(idProfile));
+        var connectionRequests = this.connectionRequestsRep.getConnectionRequestsReceived(idProfile);
+
+        List<ConnectionRequestDto> connectionRequestDtos = new ArrayList<>();
+
+        connectionRequests.forEach((cr) -> {
+
+            var profileDto = Mapper.getProfileDto(cr.getSender());
+
+            connectionRequestDtos.add(new ConnectionRequestDto(cr.getId(), profileDto, cr.getDate()));
+        });
+
+
+        return connectionRequestDtos;
     }
 
 }

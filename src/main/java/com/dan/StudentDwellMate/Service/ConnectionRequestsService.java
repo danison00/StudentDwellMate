@@ -13,7 +13,7 @@ public interface ConnectionRequestsService {
 
     List<ConnectionRequestDto> getAllConnectionRequestSent(Long idProfile);
 
-    List<ProfileResponseDto> getAllConnectionRequestReceiver(Long idProfile);
+    List<ConnectionRequestDto> getAllConnectionRequestReceiver(Long idProfile);
 
 
 }
