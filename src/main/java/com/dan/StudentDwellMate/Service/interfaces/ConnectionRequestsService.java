@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dan.StudentDwellMate.model.dto.response.ConnectionRequestDto;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
+import com.dan.StudentDwellMate.model.entities.ConnectionRequest;
 
 public interface ConnectionRequestsService {
 
@@ -17,5 +18,6 @@ public interface ConnectionRequestsService {
 
     void rejectConnectionRequest(Long idProfile, Long idConnectionRequest);
 
+    ConnectionRequest findById(Long id);
 
 }
