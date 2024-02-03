@@ -10,6 +10,8 @@ public interface ProfileService {
 
     void save(ProfileRequestDto profileDto) throws DataIntegrityViolationException;
 
+    void save(Profile profile);
+
     Profile findById(Long id);
 
     boolean existsByEmail(String email);

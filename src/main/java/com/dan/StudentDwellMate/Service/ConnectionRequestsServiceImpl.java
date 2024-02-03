@@ -112,6 +112,7 @@ public class ConnectionRequestsServiceImpl implements ConnectionRequestsService 
 
     }
 
+    @Override
     public ConnectionRequest findById(Long id) {
         return this.connectionRequestsRep.findById(id)
                 .orElseThrow(() -> new RuntimeException("Solicitação de conexão não encontrada"));

@@ -34,7 +34,6 @@ public class ProfileServiceImpl implements ProfileService {
     public List<ProfileResponseDto> getAllProfiles(Long id) {
 
         this.findById(id);
-
         var profilesDto = Mapper.getProfileDto(this.profileRep.getAllProfiles(id));
         return profilesDto;
     }
@@ -45,6 +44,11 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Profile findById(Long id) {
         return this.profileRep.findById(id).orElseThrow(()-> new RuntimeException("Usuário não encontrado"));
+    }
+
+    @Override
+    public void save(Profile profile) {
+        this.profileRep.save(profile);
     }
 
 
