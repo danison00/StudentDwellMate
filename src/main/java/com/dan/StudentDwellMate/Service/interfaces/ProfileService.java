@@ -18,5 +18,7 @@ public interface ProfileService {
 
     List<ProfileResponseDto> getAllProfiles(Long id);
 
+    boolean existsByUsername(String username);
+
 
 }

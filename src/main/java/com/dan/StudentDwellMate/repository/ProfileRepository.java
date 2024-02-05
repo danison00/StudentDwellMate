@@ -9,6 +9,8 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
         boolean existsByEmail(String email);
 
+        boolean existsByUserUsername(String username);
+
         @Query("SELECT p FROM Profile p WHERE p.wantsToSharedProperty = true AND p.id <> :id AND p NOT IN(SELECT bk FROM Profile p JOIN p.blocked bk WHERE p.id = :id)")
         List<Profile> getAllProfiles(Long id);
 

@@ -26,4 +26,13 @@ public class Exists {
         return ResponseEntity.ok().body(new ExistsResponseDto("200", "", false));
 
     }
+    @GetMapping("/username")
+    public ResponseEntity<ExistsResponseDto> username(@RequestParam String username) {
+
+        if (this.profileServ.existsByUsername(username))
+            return ResponseEntity.ok().body(new ExistsResponseDto("200", "", true));
+
+        return ResponseEntity.ok().body(new ExistsResponseDto("200", "", false));
+
+    }
 }

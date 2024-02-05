@@ -51,5 +51,10 @@ public class ProfileServiceImpl implements ProfileService {
         this.profileRep.save(profile);
     }
 
+    @Override
+    public boolean existsByUsername(String username) {
+        return profileRep.existsByUserUsername(username);
+    }
+
 
 }
