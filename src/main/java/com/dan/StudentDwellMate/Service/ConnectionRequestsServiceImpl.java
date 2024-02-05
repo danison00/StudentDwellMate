@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dan.StudentDwellMate.Service.interfaces.ConnectionRequestsService;
 import com.dan.StudentDwellMate.Service.interfaces.ProfileService;
 import com.dan.StudentDwellMate.model.dto.response.ConnectionRequestDto;
-import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 import com.dan.StudentDwellMate.model.entities.ConnectionRequest;
 import com.dan.StudentDwellMate.model.entities.Profile;
 import com.dan.StudentDwellMate.repository.ConnectionRequestsRepository;

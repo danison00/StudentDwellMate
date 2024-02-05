@@ -2,7 +2,7 @@ package com.dan.StudentDwellMate.model.dto.response;
 
 import com.dan.StudentDwellMate.model.dto.request.PropertyDto;
 
-public record ProfilePrivateDto(
+public record ProfilePrivateResponseDto(
         Long id,
         String name,
         String faculty,

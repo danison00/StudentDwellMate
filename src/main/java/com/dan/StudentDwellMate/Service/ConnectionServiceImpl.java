@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.dan.StudentDwellMate.Service.interfaces.ConnectionRequestsService;
 import com.dan.StudentDwellMate.Service.interfaces.ConnectionService;
 import com.dan.StudentDwellMate.Service.interfaces.ProfileService;
-import com.dan.StudentDwellMate.model.dto.response.ProfilePrivateDto;
+import com.dan.StudentDwellMate.model.dto.response.ProfilePrivateResponseDto;
 import com.dan.StudentDwellMate.model.entities.Profile;
 import com.dan.StudentDwellMate.util.Mapper;
 
@@ -43,7 +43,7 @@ public class ConnectionServiceImpl implements ConnectionService {
     }
 
     @Override
-    public List<ProfilePrivateDto> getAllConnections(Long id) {
+    public List<ProfilePrivateResponseDto> getAllConnections(Long id) {
         var profile = this.profileServ.findById(id);
 
         return Mapper.getProfilePrivateDto(profile.getConnections());

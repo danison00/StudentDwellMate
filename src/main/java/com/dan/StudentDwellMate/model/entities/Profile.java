@@ -49,6 +49,10 @@ public class Profile implements Serializable{
         private String cityOrigin;
         private boolean wantsToSharedProperty;
 
+        @OneToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name="id_fk_user")
+        private User user;
+
         @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
         private Property property;
 
@@ -74,7 +78,6 @@ public class Profile implements Serializable{
                 this.faculty = faculty;
                 this.course = course;
                 this.age = age;
-                this.email = email;
                 this.instagram = instagram;
                 this.facebook = facebook;
                 this.whatsapp = whatsapp;
@@ -102,7 +105,7 @@ public class Profile implements Serializable{
                 result = prime * result + (hasRentedProperty ? 1231 : 1237);
                 result = prime * result + ((cityOrigin == null) ? 0 : cityOrigin.hashCode());
                 result = prime * result + (wantsToSharedProperty ? 1231 : 1237);
-                result = prime * result + ((property == null) ? 0 : property.hashCode());
+                result = prime * result + ((user == null) ? 0 : user.hashCode());
                 return result;
         }
 
@@ -171,15 +174,16 @@ public class Profile implements Serializable{
                         return false;
                 if (wantsToSharedProperty != other.wantsToSharedProperty)
                         return false;
-                if (property == null) {
-                        if (other.property != null)
+                if (user == null) {
+                        if (other.user != null)
                                 return false;
-                } else if (!property.equals(other.property))
+                } else if (!user.equals(other.user))
                         return false;
                 return true;
         }
 
-       
         
+
+               
 
 }

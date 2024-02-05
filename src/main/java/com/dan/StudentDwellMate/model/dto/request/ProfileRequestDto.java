@@ -5,7 +5,6 @@ public record ProfileRequestDto(
                 String faculty,
                 String course,
                 int age,
-                String email,
                 String instagram,
                 String facebook,
                 String whatsapp,
@@ -13,5 +12,6 @@ public record ProfileRequestDto(
                 boolean hasRentedProperty,
                 String cityOrigin,
                 boolean wantsToSharedProperty,
-                PropertyDto property) {
+                PropertyDto property,
+                UserDto user) {
 }

@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Set;
 import com.dan.StudentDwellMate.model.dto.request.ProfileRequestDto;
 import com.dan.StudentDwellMate.model.dto.request.PropertyDto;
+import com.dan.StudentDwellMate.model.dto.request.UserDto;
 import com.dan.StudentDwellMate.model.dto.response.ConnectionRequestDto;
-import com.dan.StudentDwellMate.model.dto.response.ProfilePrivateDto;
+import com.dan.StudentDwellMate.model.dto.response.ProfilePrivateResponseDto;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
 import com.dan.StudentDwellMate.model.entities.ConnectionRequest;
 import com.dan.StudentDwellMate.model.entities.Profile;
 import com.dan.StudentDwellMate.model.entities.Property;
+import com.dan.StudentDwellMate.model.entities.User;
 
 public class Mapper {
 
@@ -21,7 +23,6 @@ public class Mapper {
         var profile = Profile.builder()
                 .name(dto.name())
                 .age(dto.age())
-                .email(dto.email())
                 .facebook(dto.facebook())
                 .instagram(dto.instagram())
                 .whatsapp(dto.whatsapp())
@@ -32,12 +33,17 @@ public class Mapper {
                 .profilePhotoUrl(dto.profilePhotoUrl())
                 .property(property)
                 .wantsToSharedProperty(dto.wantsToSharedProperty())
+                .user(getUser(dto.user()))
                 .build();
 
         if (property != null)
             property.setProfile(profile);
 
         return profile;
+    }
+
+    public static User getUser(UserDto userDto){
+        return new User(userDto.username(), userDto.password());
     }
 
     public static ProfileResponseDto getProfileDto(Profile profile) {
@@ -71,9 +77,9 @@ public class Mapper {
         return profilesDto;
     }
 
-    public static ProfilePrivateDto getProfilePrivateDto(Profile profile) {
+    public static ProfilePrivateResponseDto getProfilePrivateDto(Profile profile) {
 
-        return new ProfilePrivateDto(
+        return new ProfilePrivateResponseDto(
                 profile.getId(),
                 profile.getName(),
                 profile.getFaculty(),
@@ -91,9 +97,9 @@ public class Mapper {
 
     }
 
-    public static List<ProfilePrivateDto> getProfilePrivateDto(Set<Profile> profiles) {
+    public static List<ProfilePrivateResponseDto> getProfilePrivateDto(Set<Profile> profiles) {
 
-        List<ProfilePrivateDto> profilesDto = new ArrayList<>();
+        List<ProfilePrivateResponseDto> profilesDto = new ArrayList<>();
 
         profiles.forEach((Profile p) -> {
             profilesDto.add(
