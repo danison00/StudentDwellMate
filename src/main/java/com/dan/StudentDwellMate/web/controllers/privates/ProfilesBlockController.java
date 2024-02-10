@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dan.StudentDwellMate.Service.interfaces.BlockProfileService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -20,26 +22,27 @@ public class ProfilesBlockController {
     private BlockProfileService blockProfileServ;
 
     @GetMapping()
-    public ResponseEntity<?> findAllProfilesBlock(@RequestParam("id") Long id) {
-
+    public ResponseEntity<?> findAllProfilesBlock(HttpServletRequest request) {
+        Long id = (Long) request.getAttribute("id_profile");
 
         return ResponseEntity.ok().body(this.blockProfileServ.getAllBlockProfile(id));
     }
 
     @PostMapping()
-    public ResponseEntity<?> blockProfile(@RequestParam("idProfile") Long idProfile,
-            @RequestParam("idProfileBlock") Long idProfileBlock) {
+    public ResponseEntity<?> blockProfile(@RequestParam Long idProfileBlock, HttpServletRequest request) {
+        Long id = (Long) request.getAttribute("id_profile");
 
-        this.blockProfileServ.blockProfile(idProfile, idProfileBlock);
+        this.blockProfileServ.blockProfile(id, idProfileBlock);
 
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping()
-    public ResponseEntity<?> unblockProfile(@RequestParam("idProfile") Long idProfile,
-            @RequestParam("idProfileBlocked") Long idProfileBlocked) {
+    public ResponseEntity<?> unblockProfile(@RequestParam Long idProfileBlocked, HttpServletRequest request) {
 
-        this.blockProfileServ.unblockProfile(idProfile, idProfileBlocked);
+        Long id = (Long)request.getAttribute("id_profile");
+
+        this.blockProfileServ.unblockProfile(id, idProfileBlocked);
 
         return ResponseEntity.ok().build();
     }

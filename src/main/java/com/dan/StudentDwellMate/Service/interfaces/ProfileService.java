@@ -20,5 +20,7 @@ public interface ProfileService {
 
     boolean existsByUsername(String username);
 
+    Long findIdByUsername(String username);
+
 
 }

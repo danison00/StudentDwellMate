@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dan.StudentDwellMate.Service.interfaces.ConnectionRequestsService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,41 +22,48 @@ public class ConnectionRequestsController {
     private ConnectionRequestsService connectionRequestsServ;
 
     @PostMapping()
-    public ResponseEntity<?> saveConnectionRequest(@RequestParam("idSender") Long idSender,
-            @RequestParam("idReceiver") Long idReceiver) {
+    public ResponseEntity<?> saveConnectionRequest(@RequestParam("idReceiver") Long idReceiver,
+            HttpServletRequest request) {
 
-        this.connectionRequestsServ.addConnectionRequest(idSender, idReceiver);
+        Long id = (Long) request.getAttribute("id_profile");
+
+        this.connectionRequestsServ.addConnectionRequest(id, idReceiver);
 
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/remove")
-    public ResponseEntity<?> removeConnection(@RequestParam("idProfile") Long idProfile,
-            @RequestParam("idConnectionRequest") Long idConnectionRequest) {
+    public ResponseEntity<?> removeConnection(@RequestParam("idConnectionRequest") Long idConnectionRequest,
+            HttpServletRequest request) {
 
-        this.connectionRequestsServ.removeConnectionRequestSent(idProfile, idConnectionRequest);
+        Long id = (Long) request.getAttribute("id_profile");
+
+        this.connectionRequestsServ.removeConnectionRequestSent(id, idConnectionRequest);
 
         return ResponseEntity.ok().build();
     }
 
     @GetMapping("/sent")
-    public ResponseEntity<?> getConnectionRequestsSent(@RequestParam() Long id) {
+    public ResponseEntity<?> getConnectionRequestsSent(HttpServletRequest request) {
+
+        Long id = (Long) request.getAttribute("id_profile");
 
         return ResponseEntity.ok().body(this.connectionRequestsServ.getAllConnectionRequestSent(id));
     }
 
     @GetMapping("/received")
-    public ResponseEntity<?> getConnectionRequestsReceived(@RequestParam() Long id) {
+    public ResponseEntity<?> getConnectionRequestsReceived(HttpServletRequest request) {
+        Long id = (Long) request.getAttribute("id_profile");
 
         return ResponseEntity.ok().body(this.connectionRequestsServ.getAllConnectionRequestReceiver(id));
 
     }
 
     @DeleteMapping("/reject")
-    public ResponseEntity<?> rejectConnectionRequest(@RequestParam Long idProfile,
-            @RequestParam Long idConnectionRequest) {
+    public ResponseEntity<?> rejectConnectionRequest(@RequestParam Long idConnectionRequest, HttpServletRequest request) {
+        Long id = (Long)request.getAttribute("id_profile");
 
-        this.connectionRequestsServ.rejectConnectionRequest(idProfile, idConnectionRequest);
+        this.connectionRequestsServ.rejectConnectionRequest(id, idConnectionRequest);
 
         return ResponseEntity.ok().build();
     }

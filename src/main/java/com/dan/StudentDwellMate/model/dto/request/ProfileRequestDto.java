@@ -8,6 +8,7 @@ public record ProfileRequestDto(
                 String instagram,
                 String facebook,
                 String whatsapp,
+                String email,
                 String profilePhotoUrl,
                 boolean hasRentedProperty,
                 String cityOrigin,

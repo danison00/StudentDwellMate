@@ -14,4 +14,6 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
         @Query("SELECT p FROM Profile p WHERE p.wantsToSharedProperty = true AND p.id <> :id AND p NOT IN(SELECT bk FROM Profile p JOIN p.blocked bk WHERE p.id = :id)")
         List<Profile> getAllProfiles(Long id);
 
+        @Query("SELECT p.id FROM Profile p WHERE p.user.username = :username")
+        Long findIdByUserUsername(String username);
 }

@@ -26,6 +26,7 @@ public class Mapper {
                 .facebook(dto.facebook())
                 .instagram(dto.instagram())
                 .whatsapp(dto.whatsapp())
+                .email(dto.email())
                 .cityOrigin(dto.cityOrigin())
                 .course(dto.course())
                 .faculty(dto.faculty())

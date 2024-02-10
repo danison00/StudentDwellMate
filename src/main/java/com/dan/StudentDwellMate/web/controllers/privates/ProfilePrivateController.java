@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dan.StudentDwellMate.Service.interfaces.ProfileService;
 import com.dan.StudentDwellMate.model.dto.response.ProfileResponseDto;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -19,7 +22,11 @@ public class ProfilePrivateController {
     private ProfileService profileServ;
 
     @GetMapping("/all-profiles")
-    public ResponseEntity<List<ProfileResponseDto>> getAllProfiles(@RequestParam Long id) {
+    public ResponseEntity<List<ProfileResponseDto>> getAllProfiles(HttpServletRequest request) {
+
+        Long id = (Long)request.getAttribute("id_profile");
+
+
 
         return ResponseEntity.ok().body(this.profileServ.getAllProfiles(Long.valueOf(id)));
     }
