@@ -16,14 +16,14 @@ public class CookieServiceImpl implements CookieService{
         cookie.setHttpOnly(true);
         cookie.setMaxAge(62*2);
         cookie.setPath("/");
+
+        Cookie cookie2 = new Cookie("token-jwt-present", "true");
+
+        cookie2.setMaxAge(62*2);
+        cookie2.setPath("/");
+        response.addCookie(cookie2);
         response.addCookie(cookie);
 
-        cookie = new Cookie("token-jwt-present", "true");
-
-        cookie.setHttpOnly(true);
-        cookie.setMaxAge(62*2);
-        cookie.setPath("/");
-        response.addCookie(cookie);
 
         return response;
     }

@@ -1,6 +1,7 @@
 package com.dan.StudentDwellMate.web.controllers.publics;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,11 +33,10 @@ public class LogController {
     private CookieService cookieService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDto login, HttpServletResponse response, HttpServletRequest request) {
+    public ResponseEntity<ResponseEntity<HttpStatus>> login(@RequestBody LoginDto login, HttpServletResponse response, HttpServletRequest request) {
 
 
         var usernamePassword = new UsernamePasswordAuthenticationToken(login.username(), login.password());
-
 
 
         var auth = this.authManager.authenticate(usernamePassword);
@@ -45,10 +45,13 @@ public class LogController {
 
         response.addHeader("Authorization", "Bearer " + token);
 
-        response = cookieService.generateCookie(response, token);
+       response = cookieService.generateCookie(response, token);
 
 
-        return ResponseEntity.ok(token);
+
+
+
+        return ResponseEntity.ok().build();
 
     }
 }
